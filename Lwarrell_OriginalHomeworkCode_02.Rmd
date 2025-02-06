@@ -1,0 +1,67 @@
+---
+title: "Lwarrell_OriginalHomeworkCode_02"
+date: "2025-02-05"
+output: 
+ prettydoc::html_pretty:
+  theme: cayman
+  highlight: github
+---
+i am way too lazy to add a table of contents/picture here right now so just imagine they're here
+
+## Poisson Distribution
+This section is dedicated to the first three challenges of homework 2: using the poisson distribution to determine three probabilities. First: the probability that the researcher will hear more than 8 calls:
+```{r}
+1-ppois(q=8,lambda=15) 
+#1-ppois looks at the probability that the results will be bigger than q (in this case 8)
+#lambda represents the mean
+```
+Second, the probability that she hears 0 calls:
+```{r}
+dpois(x=0,lambda=15) 
+#dpois looks at the probility that the results will be exactly x
+#again, lambda represents the mean 
+```
+Third, the probability that she hears 3 calls:
+```{r}
+dpois(x=3,lambda=15) 
+#same scenario as the second challenge, just with x=3 instead of x=0
+```
+## Poisson mass function plot
+This section is dedicated to the fourth challenge: plotting the poisson distribution.
+```{r}
+barplot(dpois(x=0:30,lambda=15),ylim=c(0,0.15),space=0,names.arg=0:30,
+        ylab="Probability",xlab="Number of calls")
+#What kind of graph to use is not specified so I just picked bargraph 'cuz I like them
+#setting the depois function to be 0:30 gives the specified range and lambda is still 15
+#setting ylim makes the bargraph more readable
+#space=0 also just makes the bargraph nicer
+#banes.arg labels the x axis with numbers
+#ylab labels the y axis. I picked probability but you can use anything
+#xlab labels the x axis. Again, I picked number of calls but you can use anything
+#the line separation is there purely to make the whole text visible on knitted html
+```
+## Simulated results
+This section is dedicated to the fifth challenge: simulating the results.
+```{r}
+rpois(n=104,lambda=15)
+#rpois randomly generates n amount of results based on the lambda
+```
+## Plotted simulated results
+This section is dedicated to the sixth and final challenge: plotting the simulated results
+```{r}
+r<-rpois(n=104,lambda=15)
+barplot(r,xlim=c(0,30),space=0,ylim=c(0,30),names.arg=1:104,
+        ylab="Number of Calls Heard",xlab="Simulated Result Number")
+#Ok so this is kinda the same process as above. I chose to give rpois it's own line of code 
+  #instead of just writing it into the barplot. This is not necessary 
+  #and I did not have to do this
+#For some reason, the xlim doesn't completely work? the bargraph does not stop at 30 
+  #so some advice here on how to fix would be appreciated
+#space makes the graph look pretty
+#same with ylim
+#names.arg has to go all the way to 104 since that's technically how big the bargraph is
+#ylab makes the graph more readable
+#same with xlab
+#again space is there to make the code readable in html format
+```
+The bargraph in challenge number four looks very different to the bargraph in challenge six. Since the challenge four bargraph is meant to show the probability of the results, it almost looks like a bell curve around x=15. However, since the bargraph in challenge number six is simply the simulated results, what result each bar in the bargraph gives is random and the challenge six bargraph looks a lot less neat.
